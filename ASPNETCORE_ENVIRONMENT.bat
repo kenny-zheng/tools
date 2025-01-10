@@ -21,4 +21,4 @@ if %choice%==1 (
 )
 
 echo ASPNETCORE_ENVIRONMENT is set to %ASPNETCORE_ENVIRONMENT%
-shutdown /r /t 0
+echo Current ASPNETCORE_ENVIRONMENT is set to %ASPNETCORE_ENVIRONMENT%
