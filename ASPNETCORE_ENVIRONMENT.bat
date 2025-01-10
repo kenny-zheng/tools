@@ -1,0 +1,4 @@
+@echo off
+set ASPNETCORE_ENVIRONMENT=Development
+echo ASPNETCORE_ENVIRONMENT is set to %ASPNETCORE_ENVIRONMENT%
+shutdown /r /t 0
