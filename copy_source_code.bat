@@ -1,31 +1,33 @@
 @echo off
-setlocal
 
-:: 獲取當前目錄的所有資料夾
-echo 當前目錄的資料夾：
+:: Get all directories in the current folder
+echo Current directories:
 for /d %%D in (*) do (
     echo %%D
 )
 
-:: 請求用戶輸入資料夾名稱
-set /p FOLDER_NAME="請輸入要複製的資料夾名稱: "
-
-:: 檢查是否提供了資料夾名稱
+:: Prompt user to input folder name, default is DefaultFolder
+set /p FOLDER_NAME="Please enter the folder name to copy (default: DefaultFolder): "
 if "%FOLDER_NAME%"=="" (
-    echo 請提供資料夾名稱.
+    set FOLDER_NAME=DefaultFolder
+)
+
+:: Check if a folder name was provided
+if "%FOLDER_NAME%"=="" (
+    echo Please provide a folder name.
     exit /b 1
 )
 
 set PROJECT_PATH=%FOLDER_NAME%
 set DESTINATION=SourceCode
 
-:: 創建 SourceCode 資料夾（如果尚不存在）
+:: Create SourceCode folder if it doesn't exist
 if not exist "%DESTINATION%" (
     mkdir "%DESTINATION%"
 )
 
-:: 複製源代碼到 SourceCode 資料夾，排除 bin 和 obj 資料夾
+:: Copy source code to SourceCode folder, excluding bin and obj folders
 xcopy "%PROJECT_PATH%\*" "%DESTINATION%\" /E /I /EXCLUDE:bin\*;obj\* /Y
 
-echo 源代碼已成功複製到 %DESTINATION% 資料夾.
-endlocal
+echo Source code has been successfully copied to %DESTINATION% folder.
+pause
