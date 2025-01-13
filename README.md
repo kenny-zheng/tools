@@ -20,3 +20,16 @@
 在命令行中執行以下命令以啟動應用程式 (Run the following command in the command line to start the application):
 ```
 dotnet run
+```
+
+## 新增功能 (New Feature)
+
+### copy_source_code.bat
+
+此批次檔可接受 .NET 專案的路徑作為輸入，並在當前目錄中創建一個名為 `SourceCode` 的資料夾。它會排除 .NET 編譯產生的相關檔案（如 `bin` 和 `obj` 資料夾），並將源代碼複製到 `SourceCode` 資料夾中。
+
+#### 使用方法 (Usage)
+
+在命令行中執行以下命令：
+```
+copy_source_code.bat [專案路徑]
