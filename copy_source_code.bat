@@ -11,16 +11,16 @@ for /d %%D in (*) do (
     set "folder[!count!]=%%D"
 )
 
-:: Prompt user to input folder number
-set /p FOLDER_INDEX="Please enter the folder number to copy: "
+:: Prompt user to input folder name directly
+set /p FOLDER_NAME="Please enter the folder name to copy: "
 
-:: Check if a valid number was provided
-if "!folder[%FOLDER_INDEX%]!"=="" (
-    echo Please provide a valid folder number.
+:: Check if the folder exists
+if not exist "%FOLDER_NAME%" (
+    echo The specified folder does not exist.
     exit /b 1
 )
 
-set PROJECT_PATH=!folder[%FOLDER_INDEX%]!
+set PROJECT_PATH=%FOLDER_NAME%
 set DESTINATION=SourceCode
 
 :: Create SourceCode folder if it doesn't exist
@@ -28,17 +28,25 @@ if not exist "%DESTINATION%" (
     mkdir "%DESTINATION%"
 )
 
+:: Check for compilation folders in PROJECT_PATH
+set hasCompilationFiles=0
+for /d %%D in ("%PROJECT_PATH%\*") do (
+    if /i "%%~nxD"=="bin" (
+        set hasCompilationFiles=1
+    )
+    if /i "%%~nxD"=="obj" (
+        set hasCompilationFiles=1
+    )
+)
+
+:: If compilation folders are found, exit
+if %hasCompilationFiles%==1 (
+    echo Compilation folders found in %PROJECT_PATH%. Exiting.
+    exit /b 1
+)
+
 :: Copy source code to SourceCode folder, including all subfolders
 xcopy "%PROJECT_PATH%\*" "%DESTINATION%\" /E /I /Y
-
-:: Delete bin and obj folders if they exist
-if exist "%DESTINATION%\bin" (
-    rmdir /S /Q "%DESTINATION%\bin"
-)
-
-if exist "%DESTINATION%\obj" (
-    rmdir /S /Q "%DESTINATION%\obj"
-)
 
 echo Source code has been successfully copied to %DESTINATION% folder.
 pause
