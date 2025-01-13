@@ -28,12 +28,22 @@ if not exist "%DESTINATION%" (
     mkdir "%DESTINATION%"
 )
 
-:: Copy source code to SourceCode folder, excluding bin and obj folders
+:: Copy source code to SourceCode folder, excluding bin and obj folders recursively
 for /d %%D in ("%PROJECT_PATH%\*") do (
     if /i not "%%~nxD"=="bin" (
         if /i not "%%~nxD"=="obj" (
             xcopy "%%D\*" "%DESTINATION%\" /E /I /Y
         )
+    )
+)
+
+:: Check for nested directories and exclude bin and obj folders
+for /d %%D in ("%DESTINATION%\*") do (
+    if /i "%%~nxD"=="bin" (
+        rmdir /S /Q "%%D"
+    )
+    if /i "%%~nxD"=="obj" (
+        rmdir /S /Q "%%D"
     )
 )
 

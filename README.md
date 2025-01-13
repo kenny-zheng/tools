@@ -26,7 +26,7 @@ dotnet run
 
 ### copy_source_code.bat
 
-This batch file accepts a folder number input from the user and creates a folder named `SourceCode` in the current directory. It copies the contents of the selected folder into the `SourceCode` folder and deletes any `bin` and `obj` folders that may exist.
+This batch file accepts a folder name input from the user and creates a folder named `SourceCode` in the current directory. It copies the contents of the selected folder into the `SourceCode` folder and deletes any `bin` and `obj` folders that may exist.
 
 #### 使用方法 (Usage)
 
@@ -34,4 +34,4 @@ Run the following command:
 ```
 copy_source_code.bat
 ```
-Then follow the prompt to enter the folder number you want to copy.
+Then follow the prompt to enter the folder name you want to copy.
