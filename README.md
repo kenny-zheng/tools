@@ -35,3 +35,15 @@ Run the following command:
 copy_source_code.bat
 ```
 Then follow the prompt to enter the folder name you want to copy.
+
+### ASPNETCORE_ENVIRONMENT.bat
+
+This batch file allows the user to select the environment for the ASP.NET Core application. The options include Development, Staging, Production, or a Custom value. Based on the user's choice, it sets the `ASPNETCORE_ENVIRONMENT` variable accordingly.
+
+#### 使用方法 (Usage)
+
+Run the following command:
+```
+ASPNETCORE_ENVIRONMENT.bat
+```
+Then follow the prompts to select the desired environment.
