@@ -28,8 +28,17 @@ if not exist "%DESTINATION%" (
     mkdir "%DESTINATION%"
 )
 
-:: Copy source code to SourceCode folder, including all subfolders and excluding bin and obj folders
-xcopy "%PROJECT_PATH%\*" "%DESTINATION%\" /E /I /EXCLUDE:bin\*;obj\* /Y
+:: Copy source code to SourceCode folder, including all subfolders
+xcopy "%PROJECT_PATH%\*" "%DESTINATION%\" /E /I /Y
+
+:: Delete bin and obj folders if they exist
+if exist "%DESTINATION%\bin" (
+    rmdir /S /Q "%DESTINATION%\bin"
+)
+
+if exist "%DESTINATION%\obj" (
+    rmdir /S /Q "%DESTINATION%\obj"
+)
 
 echo Source code has been successfully copied to %DESTINATION% folder.
 pause
